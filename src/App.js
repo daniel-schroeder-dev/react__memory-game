@@ -9,6 +9,8 @@ class App extends React.Component {
     super(props);
     this.NUM_CARDS = 16;
     this.colors = this.createColors();
+    this.numClicks = 0;
+    this.matched = false;
     this.state = {
       cards: this.createCards(),
       lastClickedCardId: null,
@@ -53,15 +55,53 @@ class App extends React.Component {
   };
 
   handleClick = id => {
+    this.numClicks++;
     this.setState(state => {
+
       state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={true} />;
 
-      if (this.colors[id] === this.colors[state.lastClickedCardId]) console.log('match');
+      if (state.lastClickedCardId === null) {
+        state.lastClickedCardId = id;
+        return state;
+      }
 
-      state.lastClickedCardId = id;
+      if (this.colors[id] === this.colors[state.lastClickedCardId]) {
+        this.matched = true;
+      } 
 
       return state;
     });
+
+    if (this.numClicks > 1) {
+      this.checkForMatchedCards(id);
+    }
+  };
+
+  checkForMatchedCards = id => {
+    
+    this.numClicks = 0;
+
+    setTimeout(() => {
+
+      this.setState(state => {
+
+        if (this.matched) {
+          state.lastClickedCardId = null;
+          this.matched = false;
+          return state;
+        }
+
+        state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={false} />;
+      
+        state.cards[state.lastClickedCardId] = <Card key={state.lastClickedCardId} handleClick={this.handleClick} id={state.lastClickedCardId} color={this.colors[state.lastClickedCardId]} showColor={false} />;
+
+        state.lastClickedCardId = null;
+
+        return state;
+      
+      });
+    }, 2000);
+    
   };
   
   render() {

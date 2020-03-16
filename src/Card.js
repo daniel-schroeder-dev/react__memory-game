@@ -8,7 +8,7 @@ function Card(props) {
   }
 
   const style = {
-    backgroundColor: props.showColor ? props.color : 'grey',
+    backgroundColor: props.showColor || props.matched ? props.color : 'grey',
   };
 
   return (
