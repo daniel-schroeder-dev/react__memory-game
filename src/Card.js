@@ -4,6 +4,7 @@ import './Card.css';
 function Card(props) {
 
   function handleClick(e) {
+    if (!props.handleClick) return;
     props.handleClick(props.id);
   }
 

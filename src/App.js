@@ -8,6 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.NUM_CARDS = 16;
+    // this.NUM_ROUNDS = this.NUM_CARDS / 2;
+    this.NUM_ROUNDS = 0;
     this.colors = this.createColors();
     this.numClicks = 0;
     this.matched = false;
@@ -57,10 +59,12 @@ class App extends React.Component {
   handleClick = id => {
    
     this.numClicks++;
+
+    if (this.state.lastClickedCardId === id) return;
    
     this.setState(state => {
 
-      state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={true} />;
+      state.cards[id] = <Card key={id} handleClick={null} id={id} color={this.colors[id]} showColor={true} />;
 
       if (state.lastClickedCardId === null) {
         state.lastClickedCardId = id;
@@ -78,6 +82,8 @@ class App extends React.Component {
     if (this.numClicks > 1) {
       this.checkForMatchedCards(id);
     }
+
+
   
   };
 
@@ -92,6 +98,7 @@ class App extends React.Component {
         if (this.matched) {
           state.lastClickedCardId = null;
           this.matched = false;
+          this.NUM_ROUNDS--;
           return state;
         }
 
@@ -111,6 +118,7 @@ class App extends React.Component {
   initNewGame = () => {
     this.colors = this.createColors();
     this.numClicks = 0;
+    this.NUM_ROUNDS = this.NUM_CARDS / 2;
     this.matched = false;
     this.setState({
       cards: this.createCards(),
@@ -119,20 +127,31 @@ class App extends React.Component {
   };
   
   render() {
+    console.log(`Num rounds left: ${this.NUM_ROUNDS}`);
     return (
-      <div className="app">
-        <Header onClick={this.initNewGame} />
-        <div className="card-container">
-          {this.state.cards}
-        </div>
-        <div className="instructions">
-          <h2>Welcome to the Memory Game!</h2>
-          <p>Rules for gameplay:</p>
-          <ol>
-            <li>Click a card to reveal the color of the card.</li>
-            <li>Click another card, if the colors are the same, the colors will stay revealed. If the colors are different, both cards will return back to a grey color.</li>
-            <li>The game is finished when all of the cards have been successfully revealed.</li>
-          </ol>
+      <div>
+        { !this.NUM_ROUNDS ? <div className="grey-out" /> : null}
+        <div className="app">
+        { !this.NUM_ROUNDS ?  
+          <div className="winner-banner">
+            Winner!
+            <button onClick={this.initNewGame}>Play Again?</button>
+          </div>
+          : null
+        }
+          <Header onClick={this.initNewGame} />
+          <div className="card-container">
+            {this.state.cards}
+          </div>
+          <div className="instructions">
+            <h2>Welcome to the Memory Game!</h2>
+            <p>Rules for gameplay:</p>
+            <ol className="instructions__gameplay-list">
+              <li>Click a card to reveal the color of the card.</li>
+              <li>Click another card, if the colors are the same, the colors will stay revealed. If the colors are different, both cards will return back to a grey color.</li>
+              <li>The game is finished when all of the cards have been successfully revealed.</li>
+            </ol>
+          </div>
         </div>
       </div>
     );  
