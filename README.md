@@ -1,6 +1,6 @@
 # Memory Game
 
-A fun game to test your memory.
+Click the cards to reveal their color. Each card has a match somewhere on the board, see if you can find them all!
 
 ## Rules
 
@@ -18,5 +18,8 @@ A fun game to test your memory.
 - Have a speed level, where you have to complete the game in a certain amount of time.
 - Have a level where the colors are really close to each other, so it's harder to determine a match.
 
-## Bugs
+## Demo
+
+Demo can be seen here: [Memory Game](https://daniel-schroeder-dev.github.io/react__memory-game)
+
 
