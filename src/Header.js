@@ -7,7 +7,7 @@ function Header(props) {
       <h1 className="header__page-title">Memory Game</h1>
       <nav>
         <ul className="header__nav-items">
-          <li>New Game</li>
+          <li className="header__nav-item" onClick={props.onClick}>New Game</li>
         </ul>
       </nav>
     </header>

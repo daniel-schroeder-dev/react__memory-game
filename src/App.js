@@ -107,11 +107,21 @@ class App extends React.Component {
     }, 300);
     
   };
+
+  initNewGame = () => {
+    this.colors = this.createColors();
+    this.numClicks = 0;
+    this.matched = false;
+    this.setState({
+      cards: this.createCards(),
+      lastClickedCardId: null,
+    });
+  };
   
   render() {
     return (
       <div className="app">
-        <Header />
+        <Header onClick={this.initNewGame} />
         <div className="card-container">
           {this.state.cards}
         </div>
