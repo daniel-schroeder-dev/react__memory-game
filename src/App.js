@@ -55,7 +55,9 @@ class App extends React.Component {
   };
 
   handleClick = id => {
+   
     this.numClicks++;
+   
     this.setState(state => {
 
       state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={true} />;
@@ -70,11 +72,13 @@ class App extends React.Component {
       } 
 
       return state;
+  
     });
 
     if (this.numClicks > 1) {
       this.checkForMatchedCards(id);
     }
+  
   };
 
   checkForMatchedCards = id => {
@@ -100,7 +104,7 @@ class App extends React.Component {
         return state;
       
       });
-    }, 2000);
+    }, 300);
     
   };
   

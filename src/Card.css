@@ -1,5 +1,5 @@
 .card {
   border-radius: 10%;
-  background: grey;
   margin: 12px;
+  transition: background-color 0.5s ease;
 }
