@@ -7,7 +7,7 @@ const cards = [];
 const NUM_CARDS = 16;
 
 for (let i = 0; i < NUM_CARDS; i++) {
-  cards.push(<Card />);
+  cards.push(<Card key={i} />);
 }
 
 function App() {
@@ -16,6 +16,15 @@ function App() {
       <Header />
       <div className="card-container">
         {cards}
+      </div>
+      <div className="instructions">
+        <h2>Welcome to the Memory Game!</h2>
+        <p>Rules for gameplay:</p>
+        <ol>
+          <li>Click a card to reveal the color of the card</li>
+          <li>Click another card, if the colors are the same, the colors will stay revealed. If the colors are different, both cards will return back to a grey color.</li>
+          <li>The game is finished when all of the cards have been successfully revealed</li>
+        </ol>
       </div>
     </div>
   );

@@ -1,11 +1,18 @@
 .app {
   max-width: 1200px;
-  border: 1px solid red;
   margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 2px 4px 4px #ababab;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: repeat(8, 150px);
   grid-template-rows: repeat(2, 150px);
+  margin: 12px 0;
+}
+
+.instructions {
+  border-top: 1px solid #ababab;
+  padding: 24px;
 }
