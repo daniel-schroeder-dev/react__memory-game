@@ -1,5 +1,11 @@
-.app-container {
-  max-width: 1500px;
+.app {
+  max-width: 1200px;
   border: 1px solid red;
   margin: 0 auto;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(8, 150px);
+  grid-template-rows: repeat(2, 150px);
 }

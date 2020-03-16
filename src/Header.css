@@ -1,17 +1,17 @@
-.header-container {
+.header {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   padding: 18px;
-  background-color: #66758c;
+  background-color: #4d607d;
   color: #fff;
 }
 
-.header-container__page-title {
+.header__page-title {
   margin: 0;
 }
 
-.header-container__nav-items {
+.header__nav-items {
   margin: 0;
   list-style-type: none;
 }
