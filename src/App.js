@@ -11,6 +11,7 @@ class App extends React.Component {
     this.colors = this.createColors();
     this.state = {
       cards: this.createCards(),
+      lastClickedCardId: null,
     };
   }
 
@@ -54,6 +55,11 @@ class App extends React.Component {
   handleClick = id => {
     this.setState(state => {
       state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={true} />;
+
+      if (this.colors[id] === this.colors[state.lastClickedCardId]) console.log('match');
+
+      state.lastClickedCardId = id;
+
       return state;
     });
   };
