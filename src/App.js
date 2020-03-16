@@ -13,6 +13,7 @@ class App extends React.Component {
     this.state = {
       colors: this.createColors(),
     };
+    this.cards = this.createCards();
   }
 
   createColors = () => {
@@ -54,15 +55,15 @@ class App extends React.Component {
 
   handleClick = id => {
     console.log(`Clicked ${id} with color ${this.state.colors[id]}`);
+    this.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.state.colors[id]} showColor={true} />
   };
   
   render() {
-    const cards = this.createCards();
     return (
       <div className="app">
         <Header />
         <div className="card-container">
-          {cards}
+          {this.cards}
         </div>
         <div className="instructions">
           <h2>Welcome to the Memory Game!</h2>

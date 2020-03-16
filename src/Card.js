@@ -7,8 +7,12 @@ function Card(props) {
     props.handleClick(props.id);
   }
 
+  const style = {
+    backgroundColor: props.showColor ? props.color : 'grey',
+  };
+
   return (
-    <div className="card" onClick={handleClick} style={{ backgroundColor: props.color }} />
+    <div className="card" onClick={handleClick} style={style} />
   );
 }
 
