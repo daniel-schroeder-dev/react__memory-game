@@ -2,10 +2,13 @@ import React from 'react';
 import './Card.css';
 
 function Card(props) {
-  return (
-    <div className="card">
 
-    </div>
+  function handleClick(e) {
+    props.handleClick(props.id);
+  }
+
+  return (
+    <div className="card" onClick={handleClick} style={{ backgroundColor: props.color }} />
   );
 }
 

@@ -3,34 +3,66 @@ import Header from './Header';
 import Card from './Card';
 import './App.css';
 
+
+
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.NUM_CARDS = 16;
     this.state = {
-      cards: this.createCards(),
-    }
+      colors: this.createColors(),
+    };
   }
+
+  createColors = () => {
+
+    let basicColors = [
+      'red',
+      'orange',
+      'yellow',
+      'green',
+      'blue',
+      'purple',
+      'pink',
+      'brown',
+    ];
+
+    const colors = [];
+
+    const getRandomColorIndex = () => Math.floor(Math.random() * basicColors.length);
+    
+    for (let i = 1; i <= this.NUM_CARDS; i++) {
+      let color = basicColors[getRandomColorIndex()];
+      if (colors.includes(color)) {
+        basicColors = basicColors.filter(basicColor => basicColor !== color);
+      }
+      colors.push(color);
+    }
+
+    return colors;
+
+  };
 
   createCards = () => {
 
-    const cards = [];
-    const NUM_CARDS = 16;
+    return (this.state.colors.map((color, i) => (
+      <Card key={i} handleClick={this.handleClick} id={i} color={color}/>
+    )));
 
-    for (let i = 0; i < NUM_CARDS; i++) {
-      cards.push(<Card key={i} />);
-    }
+  };
 
-    return cards;
-  
+  handleClick = id => {
+    console.log(`Clicked ${id} with color ${this.state.colors[id]}`);
   };
   
   render() {
+    const cards = this.createCards();
     return (
       <div className="app">
         <Header />
         <div className="card-container">
-          {this.state.cards}
+          {cards}
         </div>
         <div className="instructions">
           <h2>Welcome to the Memory Game!</h2>
