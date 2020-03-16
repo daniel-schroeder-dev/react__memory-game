@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Card from './Card';
+import WinnerBanner from './WinnerBanner';
 import './App.css';
 
 class App extends React.Component {
@@ -8,8 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.NUM_CARDS = 16;
-    // this.NUM_ROUNDS = this.NUM_CARDS / 2;
-    this.NUM_ROUNDS = 0;
+    this.NUM_ROUNDS = this.NUM_CARDS / 2;
     this.colors = this.createColors();
     this.numClicks = 0;
     this.matched = false;
@@ -132,13 +132,10 @@ class App extends React.Component {
       <div>
         { !this.NUM_ROUNDS ? <div className="grey-out" /> : null}
         <div className="app">
-        { !this.NUM_ROUNDS ?  
-          <div className="winner-banner">
-            Winner!
-            <button onClick={this.initNewGame}>Play Again?</button>
-          </div>
-          : null
-        }
+          <WinnerBanner 
+            onClick={this.initNewGame} 
+            showBanner={!this.NUM_ROUNDS} 
+          />
           <Header onClick={this.initNewGame} />
           <div className="card-container">
             {this.state.cards}
