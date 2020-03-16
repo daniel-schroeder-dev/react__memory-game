@@ -1,0 +1,17 @@
+.header-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 18px;
+  background-color: #66758c;
+  color: #fff;
+}
+
+.header-container__page-title {
+  margin: 0;
+}
+
+.header-container__nav-items {
+  margin: 0;
+  list-style-type: none;
+}
