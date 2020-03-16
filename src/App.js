@@ -3,17 +3,15 @@ import Header from './Header';
 import Card from './Card';
 import './App.css';
 
-
-
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.NUM_CARDS = 16;
+    this.colors = this.createColors();
     this.state = {
-      colors: this.createColors(),
+      cards: this.createCards(),
     };
-    this.cards = this.createCards();
   }
 
   createColors = () => {
@@ -47,15 +45,17 @@ class App extends React.Component {
 
   createCards = () => {
 
-    return (this.state.colors.map((color, i) => (
+    return (this.colors.map((color, i) => (
       <Card key={i} handleClick={this.handleClick} id={i} color={color}/>
     )));
 
   };
 
   handleClick = id => {
-    console.log(`Clicked ${id} with color ${this.state.colors[id]}`);
-    this.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.state.colors[id]} showColor={true} />
+    this.setState(state => {
+      state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={true} />;
+      return state;
+    });
   };
   
   render() {
@@ -63,7 +63,7 @@ class App extends React.Component {
       <div className="app">
         <Header />
         <div className="card-container">
-          {this.cards}
+          {this.state.cards}
         </div>
         <div className="instructions">
           <h2>Welcome to the Memory Game!</h2>
