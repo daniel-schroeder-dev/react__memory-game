@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.NUM_CARDS = 16;
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
-    this.colors = this.createColors();
+    this.colors = this.createColorsArray();
     this.numClicks = 0;
     this.matched = false;
     this.state = {
@@ -20,7 +20,7 @@ class App extends React.Component {
     };
   }
 
-  createColors = () => {
+  createColorsArray = () => {
 
     let basicColors = [
       'red',
@@ -115,7 +115,7 @@ class App extends React.Component {
   };
 
   initNewGame = () => {
-    this.colors = this.createColors();
+    this.colors = this.createColorsArray();
     this.numClicks = 0;
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
     this.matched = false;
