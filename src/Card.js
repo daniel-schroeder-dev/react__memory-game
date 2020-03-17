@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Card.css';
 
 function Card(props) {
@@ -16,5 +17,12 @@ function Card(props) {
     <div className="card" onClick={handleClick} style={style} />
   );
 }
+
+Card.propTypes = {
+  color: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  handleClick: PropTypes.func,
+  showColor: PropTypes.bool,
+};
 
 export default Card;

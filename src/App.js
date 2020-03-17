@@ -81,14 +81,13 @@ class App extends React.Component {
     });
 
     if (this.numClicks > 1) {
+      this.numClicks = 0;
       this.checkForMatchedCards(id);
     }
   
   };
 
   checkForMatchedCards = id => {
-    
-    this.numClicks = 0;
 
     setTimeout(() => {
 
