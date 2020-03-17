@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './WinnerBanner.css';
 
 function WinnerBanner(props) {
@@ -10,5 +11,10 @@ function WinnerBanner(props) {
     </div>
   );
 }
+
+WinnerBanner.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  showBanner: PropTypes.bool.isRequired,
+};
 
 export default WinnerBanner;
