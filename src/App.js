@@ -65,7 +65,15 @@ class App extends React.Component {
    
     this.setState(state => {
 
-      state.cards[id] = <Card key={id} handleClick={null} id={id} color={this.colors[id]} showColor={true} />;
+      state.cards[id] = (
+        <Card 
+          key={id} 
+          handleClick={null} 
+          id={id} 
+          color={this.colors[id]} 
+          showColor={true} 
+        />
+      );
 
       if (state.lastClickedCardId === null) {
         state.lastClickedCardId = id;
@@ -100,9 +108,25 @@ class App extends React.Component {
           return state;
         }
 
-        state.cards[id] = <Card key={id} handleClick={this.handleClick} id={id} color={this.colors[id]} showColor={false} />;
+        state.cards[id] = (
+          <Card 
+            key={id} 
+            handleClick={this.handleClick} 
+            id={id} 
+            color={this.colors[id]} 
+            showColor={false} 
+          />
+        );
       
-        state.cards[state.lastClickedCardId] = <Card key={state.lastClickedCardId} handleClick={this.handleClick} id={state.lastClickedCardId} color={this.colors[state.lastClickedCardId]} showColor={false} />;
+        state.cards[state.lastClickedCardId] = (
+          <Card 
+            key={state.lastClickedCardId} 
+            handleClick={this.handleClick} 
+            id={state.lastClickedCardId} 
+            color={this.colors[state.lastClickedCardId]} 
+            showColor={false} 
+          />
+        );
 
         state.lastClickedCardId = null;
 
@@ -127,7 +151,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        { !this.NUM_ROUNDS ? <div className="grey-out" /> : null}
+        {!this.NUM_ROUNDS ? <div className="grey-out" /> : null}
         <div className="app">
           <WinnerBanner 
             onClick={this.initNewGame} 
