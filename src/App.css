@@ -12,15 +12,6 @@
   margin: 12px 0;
 }
 
-.instructions {
-  border-top: 1px solid #ababab;
-  padding: 24px 24px 24px 48px;
-}
-
-.instructions__gameplay-list {
-  width: 800px;
-}
-
 .grey-out {
   position: fixed;
   width: 100vw;

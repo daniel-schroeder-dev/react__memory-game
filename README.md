@@ -17,6 +17,7 @@ Click the cards to reveal their color. Each card has a match somewhere on the bo
 - Setup some sort of way to track progress for a player, maybe save state so they can come back to the game.
 - Have a speed level, where you have to complete the game in a certain amount of time.
 - Have a level where the colors are really close to each other, so it's harder to determine a match.
+- Document the code!!!
 
 ## Demo
 
