@@ -13,7 +13,6 @@ class App extends React.Component {
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
     this.colors = this.createColorsArray();
     this.numClicks = 0;
-    this.matched = false;
     this.state = {
       cards: this.createCards(),
       lastClickedCardId: null,
@@ -75,10 +74,6 @@ class App extends React.Component {
 
       const lastClickedCardId = state.lastClickedCardId === null ? id : state.lastClickedCardId;
 
-      if (state.lastClickedCardId !== null && this.colors[id] === this.colors[state.lastClickedCardId]) {
-        this.matched = true;
-      }
-
       return { cards, lastClickedCardId };
 
     });
@@ -96,9 +91,8 @@ class App extends React.Component {
 
       this.setState((state, props) => {
 
-        if (this.matched) {
+        if (state.lastClickedCardId !== null && this.colors[id] === this.colors[state.lastClickedCardId]) {
           const lastClickedCardId = null;
-          this.matched = false;
           this.NUM_ROUNDS--;
           return { lastClickedCardId };
         }
@@ -136,7 +130,6 @@ class App extends React.Component {
     this.colors = this.createColorsArray();
     this.numClicks = 0;
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
-    this.matched = false;
     this.setState({
       cards: this.createCards(),
       lastClickedCardId: null,
