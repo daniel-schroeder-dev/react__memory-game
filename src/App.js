@@ -12,10 +12,9 @@ class App extends React.Component {
     this.NUM_CARDS = 16;
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
     this.colors = this.createColorsArray();
-    this.numClicks = 0;
+    this.lastClickedCardId = null;
     this.state = {
       cards: this.createCards(),
-      lastClickedCardId: null,
     };
   }
 
@@ -57,7 +56,7 @@ class App extends React.Component {
   };
 
   handleClick = id => {
-   
+
     this.setState((state, props) => {
       
       const cards = [...state.cards];
@@ -72,30 +71,29 @@ class App extends React.Component {
         />
       );
 
-      const lastClickedCardId = state.lastClickedCardId === null ? id : state.lastClickedCardId;
-
-      return { cards, lastClickedCardId };
+      return { cards };
 
     });
 
-    if (++this.numClicks > 1) {
-      this.numClicks = 0;
-      this.checkForMatchedCards(id);
+    if (this.colors[id] === this.colors[this.lastClickedCardId]) {
+      this.lastClickedCardId = null;
+      this.NUM_ROUNDS--;
+      return;
+    }
+
+    this.lastClickedCardId = this.lastClickedCardId === null ? id : this.lastClickedCardId;
+
+    if (this.lastClickedCardId !== id) {
+      this.hideUnmatchedCards(id);
     }
   
   };
 
-  checkForMatchedCards = id => {
+  hideUnmatchedCards = id => {
 
     setTimeout(() => {
-
+      
       this.setState((state, props) => {
-
-        if (state.lastClickedCardId !== null && this.colors[id] === this.colors[state.lastClickedCardId]) {
-          const lastClickedCardId = null;
-          this.NUM_ROUNDS--;
-          return { lastClickedCardId };
-        }
 
         const cards = [...state.cards];
 
@@ -109,17 +107,19 @@ class App extends React.Component {
           />
         );
       
-        cards[state.lastClickedCardId] = (
+        cards[this.lastClickedCardId] = (
           <Card 
-            key={state.lastClickedCardId} 
+            key={this.lastClickedCardId} 
             handleClick={this.handleClick} 
-            id={state.lastClickedCardId} 
-            color={this.colors[state.lastClickedCardId]} 
+            id={this.lastClickedCardId} 
+            color={this.colors[this.lastClickedCardId]} 
             showColor={false} 
           />
         );
 
-        return { cards, lastClickedCardId: null };
+        this.lastClickedCardId = null;
+
+        return { cards };
       
       });
     }, 300);
@@ -128,11 +128,10 @@ class App extends React.Component {
 
   initNewGame = () => {
     this.colors = this.createColorsArray();
-    this.numClicks = 0;
     this.NUM_ROUNDS = this.NUM_CARDS / 2;
+    this.lastClickedCardId = null;
     this.setState({
       cards: this.createCards(),
-      lastClickedCardId: null,
     });
   };
   
