@@ -61,8 +61,6 @@ class App extends React.Component {
    
     this.setState((state, props) => {
       
-      if (state.lastClickedCardId === id) return;
-
       const cards = [...state.cards];
 
       cards[id] = (
