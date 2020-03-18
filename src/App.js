@@ -59,8 +59,6 @@ class App extends React.Component {
 
   handleClick = id => {
    
-    this.numClicks++;
-
     this.setState((state, props) => {
       
       if (state.lastClickedCardId === id) return;
@@ -87,7 +85,7 @@ class App extends React.Component {
 
     });
 
-    if (this.numClicks > 1) {
+    if (++this.numClicks > 1) {
       this.numClicks = 0;
       this.checkForMatchedCards(id);
     }
