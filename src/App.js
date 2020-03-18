@@ -61,11 +61,13 @@ class App extends React.Component {
    
     this.numClicks++;
 
-    if (this.state.lastClickedCardId === id) return;
-   
-    this.setState(state => {
+    this.setState((state, props) => {
+      
+      if (state.lastClickedCardId === id) return;
 
-      state.cards[id] = (
+      const cards = [...state.cards];
+
+      cards[id] = (
         <Card 
           key={id} 
           handleClick={null} 
@@ -75,17 +77,14 @@ class App extends React.Component {
         />
       );
 
-      if (state.lastClickedCardId === null) {
-        state.lastClickedCardId = id;
-        return state;
+      const lastClickedCardId = state.lastClickedCardId === null ? id : state.lastClickedCardId;
+
+      if (state.lastClickedCardId !== null && this.colors[id] === this.colors[state.lastClickedCardId]) {
+        this.matched = true;
       }
 
-      if (this.colors[id] === this.colors[state.lastClickedCardId]) {
-        this.matched = true;
-      } 
+      return { cards, lastClickedCardId };
 
-      return state;
-  
     });
 
     if (this.numClicks > 1) {
