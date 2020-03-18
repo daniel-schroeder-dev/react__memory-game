@@ -105,7 +105,9 @@ class App extends React.Component {
           return { lastClickedCardId };
         }
 
-        state.cards[id] = (
+        const cards = [...state.cards];
+
+        cards[id] = (
           <Card 
             key={id} 
             handleClick={this.handleClick} 
@@ -115,7 +117,7 @@ class App extends React.Component {
           />
         );
       
-        state.cards[state.lastClickedCardId] = (
+        cards[state.lastClickedCardId] = (
           <Card 
             key={state.lastClickedCardId} 
             handleClick={this.handleClick} 
@@ -125,9 +127,7 @@ class App extends React.Component {
           />
         );
 
-        state.lastClickedCardId = null;
-
-        return state;
+        return { cards, lastClickedCardId: null };
       
       });
     }, 300);
