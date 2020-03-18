@@ -96,13 +96,13 @@ class App extends React.Component {
 
     setTimeout(() => {
 
-      this.setState(state => {
+      this.setState((state, props) => {
 
         if (this.matched) {
-          state.lastClickedCardId = null;
+          const lastClickedCardId = null;
           this.matched = false;
           this.NUM_ROUNDS--;
-          return state;
+          return { lastClickedCardId };
         }
 
         state.cards[id] = (
